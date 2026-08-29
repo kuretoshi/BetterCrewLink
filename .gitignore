@@ -1,10 +1,14 @@
 .DS_Store
 dist/
+dist-*/
 dist-lite/
+dist-lite-*/
 dist-current/
 dist-lite-current/
 node_modules/
 .tools/
+tools/
+$extract/
 thumbs.db
 .idea/
 yarn-error.log
