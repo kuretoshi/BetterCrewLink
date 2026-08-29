@@ -22,6 +22,7 @@ export interface AmongUsState {
 	maxPlayers: number;
 	mod: ModsType;
 	oldMeetingHud: boolean;
+	airshipMeetingByOutfit: boolean;
 	debug?: {
 		rawGameState: number;
 		meetingHud: number;

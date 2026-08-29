@@ -16,6 +16,7 @@ extraFiles:
     to: TanukiBCL-target-pid.ps1
 
 win:
+  icon: resources/icon.ico
   executableName: TanukiBCL
   publish:
     - provider: github

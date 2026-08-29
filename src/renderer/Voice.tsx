@@ -749,7 +749,7 @@ const Voice: React.FC<VoiceProps> = function ({ t, error: initialError }: VoiceP
 			state.debug.meetingHudCachePtr !== 0 &&
 			state.debug.meetingHudState >= 0 &&
 			state.debug.meetingHudState < 4;
-		const hasOutfitSignal = !!state.debug?.airshipMeetingByOutfit;
+		const hasOutfitSignal = !!state.airshipMeetingByOutfit || !!state.debug?.airshipMeetingByOutfit;
 
 		return (
 			state.gameState === GameState.TASKS &&
@@ -855,7 +855,7 @@ const Voice: React.FC<VoiceProps> = function ({ t, error: initialError }: VoiceP
 				localTaskPtr: gameState.debug?.localTaskPtr,
 				localObjectFlags: gameState.debug?.localObjectFlags,
 				initPatternDebug: gameState.debug?.initPatternDebug,
-				airshipMeetingByOutfit: gameState.debug?.airshipMeetingByOutfit,
+				airshipMeetingByOutfit: gameState.airshipMeetingByOutfit || gameState.debug?.airshipMeetingByOutfit,
 				currentOutfits: gameState.debug?.currentOutfits,
 				localObjectDiffs: gameState.debug?.localObjectDiffs,
 				localPlayerDiffs: gameState.debug?.localPlayerDiffs,
@@ -996,7 +996,7 @@ const Voice: React.FC<VoiceProps> = function ({ t, error: initialError }: VoiceP
 				localTaskPtr: state.debug?.localTaskPtr,
 				localObjectFlags: state.debug?.localObjectFlags,
 				initPatternDebug: state.debug?.initPatternDebug,
-				airshipMeetingByOutfit: state.debug?.airshipMeetingByOutfit,
+				airshipMeetingByOutfit: state.airshipMeetingByOutfit || state.debug?.airshipMeetingByOutfit,
 				currentOutfits: state.debug?.currentOutfits,
 				localObjectDiffs: state.debug?.localObjectDiffs,
 				localPlayerDiffs: state.debug?.localPlayerDiffs,
@@ -1038,6 +1038,7 @@ const Voice: React.FC<VoiceProps> = function ({ t, error: initialError }: VoiceP
 		let skipDistanceCheck = false;
 		let muffleEnabled = false;
 		let voiceEffectEnabled = false;
+		const airshipMeetingAudioFallback = isAirshipMeetingAudioFallback(state);
 		const airshipSpawnAudioFallback = !me.isDead && isAirshipSpawnAudioFallback(state);
 		const aliveHearingDeadInTasks = audioGameState === GameState.TASKS && !me.isDead && other.isDead;
 		const canHearDeadInTasks = aliveHearingDeadInTasks && canHearGhosts(me);
@@ -1094,7 +1095,7 @@ const Voice: React.FC<VoiceProps> = function ({ t, error: initialError }: VoiceP
 				) {
 					collided = true;
 				}
-				if (airshipSpawnAudioFallback) {
+				if (airshipMeetingAudioFallback) {
 					skipDistanceCheck = true;
 					panPos = [0, 0];
 				}

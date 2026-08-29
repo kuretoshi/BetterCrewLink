@@ -342,12 +342,12 @@ export default class GameReader {
 					mixupSabotaged = shiftedPlayerCount >= mixupThreshold;
 					if (voiceDebugEnabled) {
 						currentOutfits = activePlayers.map((player) => `${player.id}:${player.currentOutfit}`).join(',');
-						airshipMeetingByOutfit =
-							map === MapType.AIRSHIP &&
-							activePlayers.length >= 2 &&
-							activePlayers.every((player) => player.currentOutfit === 1) &&
-							!mixupSabotaged;
 					}
+					airshipMeetingByOutfit =
+						map === MapType.AIRSHIP &&
+						activePlayers.length >= 2 &&
+						activePlayers.every((player) => player.currentOutfit === 1) &&
+						!mixupSabotaged;
 				}
 				if (state === GameState.TASKS) {
 					const systemsPtr = this.readMemory<number>('ptr', shipPtr, this.offsets.shipStatus_systems);
@@ -481,6 +481,7 @@ export default class GameReader {
 				currentServer: this.currentServer,
 				maxPlayers,
 				oldMeetingHud: this.oldMeetingHud,
+				airshipMeetingByOutfit,
 				...(voiceDebugEnabled
 					? {
 						debug: {

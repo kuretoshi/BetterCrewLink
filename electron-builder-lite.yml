@@ -1,7 +1,7 @@
 appId: net.ottomated.crewlinkkai.lite
 extraMetadata:
   name: bettercrewlinkkailite
-  version: 3.1.96
+  version: 3.1.97
 productName: BetterCrewLinkKaiLite
 copyright: Copyright © 2021 OhMyGuus
 directories:
@@ -16,6 +16,7 @@ asarUnpack:
   - "**/*.node"
 
 win:
+  icon: resources/icon.ico
   executableName: TanukiBCLLite
   publish:
     - provider: github
